@@ -13,7 +13,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 public class MyBot extends TelegramLongPollingBot {
 
     public static final String USERNAME = "@Hockey_team_bot";
-    public static final String TOKEN = "980065316:AAHqnnc6HRKXEemwA0kfIIDAr719e-REO3Q";
+    public static final String TOKEN = System.getenv("VARIABLE_NAME");
 
     public MyBot(DefaultBotOptions botOptions) {
         super(botOptions);
