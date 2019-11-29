@@ -2,58 +2,61 @@ package ru.marina.spsuace.telegramhockeybot;
 
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.ApiContext;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
-public class MyBot extends TelegramLongPollingBot {
+public class MyBot extends TelegramLongPollingCommandBot {
 
     public static final String USERNAME = "@Hockey_team_bot";
     public static final String TOKEN = System.getenv("VARIABLE_NAME");
 
+    Championship champ = new Championship();
+    private long chat_id;
+
     public MyBot(DefaultBotOptions botOptions) {
-        super(botOptions);
+        super(botOptions, USERNAME);
+        register(new InfoTeam());
     }
 
-    public static void main(String[] args) {
-        ApiContextInitializer.init();
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try {
-            DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
-            botOptions.setProxyHost("177.8.226.254");
-            botOptions.setProxyPort(8080);
-            botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
-            telegramBotsApi.registerBot(new MyBot(botOptions));
-        } catch (TelegramApiRequestException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onUpdateReceived(Update update) {
-        update.getUpdateId();
-        if (update.hasMessage()) {
-            SendMessage sendMessage = new SendMessage().setChatId((update.getMessage().getChatId()));
-            if (update.getMessage().getText().equals("Who is the champion?")) {
-                sendMessage.setText("SKA IS THE BEST!!!");
-            } else {
-                sendMessage.setText("If you like hockey, ask who is the champion:)");
-            }
+        public static void main(String[] args) {
+            ApiContextInitializer.init();
+            TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
             try {
-                execute(sendMessage);
+                DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
+                botOptions.setProxyHost("51.158.179.242");
+                botOptions.setProxyPort(8080);
+                botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
+                telegramBotsApi.registerBot(new MyBot(botOptions));
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
         }
-    }
+
 
     @Override
-    public String getBotUsername() {
-        return USERNAME;
+    public void processNonCommandUpdate(Update update) {
+        update.getUpdateId();
+
+        SendMessage sendMessage = new SendMessage().setChatId(update.getMessage().getChatId());
+        chat_id = update.getMessage().getChatId();
+        sendMessage.setText(input(update.getMessage().getText()));
+
+        try {
+            execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String input(String msg){
+        if(msg.contains("Hi") || msg.contains("Hello") || msg.contains("Привет")){
+            return "Привет фанатам! Я спротивный бот КХЛ. Если любишь хоккей, погнали!!!";
+        }
+        return "Не понял!";
     }
 
     @Override
