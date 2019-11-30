@@ -12,4 +12,22 @@ public class Team {
         city = city1;
         country = country1;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDiv() {
+        return division;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+
 }

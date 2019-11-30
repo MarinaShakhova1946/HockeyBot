@@ -11,4 +11,8 @@ public class Championship {
         listTeam=teams1;
         listTable=table1;
     }
+
+    public Team getTeam(int index) {
+        return listTeam.get(index);
+    }
 }

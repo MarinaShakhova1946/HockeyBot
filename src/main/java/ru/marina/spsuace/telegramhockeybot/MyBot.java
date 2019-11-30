@@ -14,7 +14,6 @@ public class MyBot extends TelegramLongPollingCommandBot {
     public static final String USERNAME = "@Hockey_team_bot";
     public static final String TOKEN = System.getenv("VARIABLE_NAME");
 
-    Championship champ = new Championship();
     private long chat_id;
 
     public MyBot(DefaultBotOptions botOptions) {
@@ -27,7 +26,7 @@ public class MyBot extends TelegramLongPollingCommandBot {
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
             try {
                 DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
-                botOptions.setProxyHost("51.158.179.242");
+                botOptions.setProxyHost("180.183.225.133");
                 botOptions.setProxyPort(8080);
                 botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
                 telegramBotsApi.registerBot(new MyBot(botOptions));
