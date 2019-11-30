@@ -17,9 +17,6 @@ public class InfoTeam extends BotCommand {
         super(commandIdentifier, description);
     }
 
-    private Championship championship=new Championship();
-    private ArrayList<Championship.Team> thisChamp = new ArrayList<>();
-
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         String userName = chat.getUserName();
@@ -31,11 +28,6 @@ public class InfoTeam extends BotCommand {
         StringBuilder messageTextBuilder = new StringBuilder("Пожалуйста выберите интересующую вас команду ");
         messageTextBuilder.append("\n");
         messageTextBuilder.append("ska");
-        thisChamp=championship.ChampTeams();
-        for (int i = 0; i < 4; i++) {
-            messageTextBuilder.append("\n");
-            messageTextBuilder.append(thisChamp.get(i));
-        }
 
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
