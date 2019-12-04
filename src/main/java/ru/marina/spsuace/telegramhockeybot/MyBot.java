@@ -26,7 +26,7 @@ public class MyBot extends TelegramLongPollingCommandBot {
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
             try {
                 DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
-                botOptions.setProxyHost("180.183.225.133");
+                botOptions.setProxyHost("104.244.77.254");
                 botOptions.setProxyPort(8080);
                 botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
                 telegramBotsApi.registerBot(new MyBot(botOptions));

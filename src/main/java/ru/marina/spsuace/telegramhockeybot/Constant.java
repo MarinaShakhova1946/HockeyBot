@@ -1,6 +1,8 @@
 package ru.marina.spsuace.telegramhockeybot;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Constant {
 
@@ -21,6 +23,15 @@ public class Constant {
     public static final Game game3 = new Game("Витязь:Нефтехимик","2:1","1:0 А.Бывальцев; " +
             "1:1 Я.Берглунд; 2:1 А.Макеев; ");
 
-    public static final Championship CHL = new Championship(Arrays.asList(SKA,LOK,AKB,AVN),Arrays.asList(placeSKA,placeLOK,placeAKB,placeAVN));
+    public static final Championship CHL = new Championship(Arrays.asList(placeSKA,placeLOK,placeAKB,placeAVN));
+
+    static {
+        Map<String, Team> teamMap = new HashMap<>();
+        teamMap.put(SKA.getName(), SKA);
+        teamMap.put(LOK.getName(), LOK);
+        teamMap.put(AKB.getName(), AKB);
+        teamMap.put(AVN.getName(), AVN);
+        CHL.setTeams(teamMap);
+    }
 
 }

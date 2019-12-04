@@ -41,7 +41,7 @@ public class InfoTeam extends BotCommand {
         if (arguments != null && arguments.length > 0) {
             for (int i = 0; i < 4; i++) {
                 name[i]=CHL.getTeam(i).getName();
-                if(arguments.equals(name[i])){
+                if(arguments[0].equals(name[i])){
                     messageTextBuilder.append("ÈÍÔÎÐÌÀÖÈß Î ÊÎÌÀÍÄÅ:\n");
                     messageTextBuilder.append("Íàçâàíèå êîìàíäû: ");
                     messageTextBuilder.append(CHL.getTeam(i).getName());
