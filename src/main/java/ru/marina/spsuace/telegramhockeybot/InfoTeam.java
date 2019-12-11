@@ -32,32 +32,24 @@ public class InfoTeam extends BotCommand {
 
         StringBuilder messageTextBuilder = new StringBuilder();
 
-        String[] name;
-        name = new String[4];
-        for (int i = 0; i < 4; i++) {
-            name[i]=CHL.getTeam(i).getName();
-        }
-
         if (arguments != null && arguments.length > 0) {
-            for (int i = 0; i < 4; i++) {
-                name[i]=CHL.getTeam(i).getName();
-                if(arguments[0].equals(name[i])){
+                Team team = CHL.getTeam(arguments[0]);
+                if(team != null){
                     messageTextBuilder.append("ИНФОРМАЦИЯ О КОМАНДЕ:\n");
                     messageTextBuilder.append("Название команды: ");
-                    messageTextBuilder.append(CHL.getTeam(i).getName());
+                    messageTextBuilder.append(team.getName());
                     messageTextBuilder.append("Дивизион: ");
-                    messageTextBuilder.append(CHL.getTeam(i).getDiv());
+                    messageTextBuilder.append(team.getDiv());
                     messageTextBuilder.append("Город: ");
-                    messageTextBuilder.append(CHL.getTeam(i).getCity());
+                    messageTextBuilder.append(team.getCity());
                     messageTextBuilder.append("Страна: ");
-                    messageTextBuilder.append(CHL.getTeam(i).getCountry());
+                    messageTextBuilder.append(team.getCountry());
                 }
-            }
         }else{
             messageTextBuilder.append("Список всех команд КХЛ");
-            for (int i = 0; i < 4; i++) {
+            for (String name : CHL.getTeams().keySet()) {
                 messageTextBuilder.append("\n");
-                messageTextBuilder.append(CHL.getTeam(i).getName());
+                messageTextBuilder.append(name);
             }
             messageTextBuilder.append("\n\n");
             messageTextBuilder.append("Если вам нужна информация о какой то команде напишите её название после данной команды...");

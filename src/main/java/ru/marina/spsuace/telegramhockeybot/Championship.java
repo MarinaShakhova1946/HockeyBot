@@ -12,11 +12,15 @@ public class Championship {
         listTable=table1;
     }
 
-    public Team getTeam(int index) {
-        return listTeam.get(index);
+    public Team getTeam(String name) {
+        return listTeam.get(name);
     }
 
     public void setTeams(Map<String, Team> teamMap) {
         listTeam = teamMap;
+    }
+
+    public Map<String,Team> getTeams() {
+        return listTeam;
     }
 }
