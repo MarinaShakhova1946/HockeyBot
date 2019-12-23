@@ -10,4 +10,16 @@ public class Game {
         score=score1;
         statistic=static1;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public String getStatistic() {
+        return statistic;
+    }
 }

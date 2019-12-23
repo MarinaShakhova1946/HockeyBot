@@ -19,6 +19,9 @@ public class MyBot extends TelegramLongPollingCommandBot {
     public MyBot(DefaultBotOptions botOptions) {
         super(botOptions, USERNAME);
         register(new InfoTeam());
+        register(new Help());
+        register(new InfoTable());
+        register(new InfoTour());
     }
 
         public static void main(String[] args) {
@@ -26,7 +29,7 @@ public class MyBot extends TelegramLongPollingCommandBot {
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
             try {
                 DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
-                botOptions.setProxyHost("207.246.121.173");
+                botOptions.setProxyHost("151.253.165.70");
                 botOptions.setProxyPort(8080);
                 botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
                 telegramBotsApi.registerBot(new MyBot(botOptions));

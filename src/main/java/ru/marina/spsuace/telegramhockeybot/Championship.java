@@ -6,10 +6,11 @@ import java.util.Map;
 public class Championship {
 
     private Map<String,Team> listTeam ;
-    private List<Schedule> listTable ;
+    private Map<String,Schedule> listTable ;
+    private List<Tour> listTour ;
 
-    public Championship(List<Schedule> table1) {
-        listTable=table1;
+    public Championship(List<Tour> tours) {
+        listTour=tours;
     }
 
     public Team getTeam(String name) {
@@ -22,5 +23,21 @@ public class Championship {
 
     public Map<String,Team> getTeams() {
         return listTeam;
+    }
+
+    public Schedule getSchedule(String name) {
+        return listTable.get(name);
+    }
+
+    public void setSchedule(Map<String, Schedule> scheduleMap) {
+        listTable = scheduleMap;
+    }
+
+    public Map<String,Schedule> getSchedule() {
+        return listTable;
+    }
+
+    public Tour getTour(int index) {
+        return listTour.get(index);
     }
 }

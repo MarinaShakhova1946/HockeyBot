@@ -9,11 +9,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import static ru.marina.spsuace.telegramhockeybot.Constant.CHL;
 
-public class InfoTeam extends BotCommand {
+public class InfoTour extends BotCommand {
 
-    private static final String commandIdentifier = "infoteam";
-    private static final String description = "Information about teams";
-    public InfoTeam() {
+    private static final String commandIdentifier = "infotour";
+    private static final String description = "Information about tours";
+    public InfoTour() {
         super(commandIdentifier, description);
     }
 
@@ -27,27 +27,30 @@ public class InfoTeam extends BotCommand {
 
         StringBuilder messageTextBuilder = new StringBuilder();
 
+        String[] noms;
+        noms = new String[2];
+        for (int i = 0; i < 2; i++) {
+            noms[i]=CHL.getTour(i).getNomer();
+        }
+
         if (arguments != null && arguments.length > 0) {
-                Team team = CHL.getTeam(arguments[0]);
-                if(team != null){
-                    messageTextBuilder.append("ИНФОРМАЦИЯ О КОМАНДЕ:\n");
-                    messageTextBuilder.append("Название команды: ");
-                    messageTextBuilder.append(team.getName());
-                    messageTextBuilder.append("Дивизион: ");
-                    messageTextBuilder.append(team.getDiv());
-                    messageTextBuilder.append("Город: ");
-                    messageTextBuilder.append(team.getCity());
-                    messageTextBuilder.append("Страна: ");
-                    messageTextBuilder.append(team.getCountry());
+            messageTextBuilder.append("Прошедшие за выбранную неделю игры:\n");
+            for (int i = 0; i < 2; i++) {
+                if(arguments[0].equals(noms[i])){
+                    for (int j = 0; j < 3; j++) {
+                        messageTextBuilder.append(CHL.getTour(i).getGame(j).getName());
+                        messageTextBuilder.append("\n");
+                        messageTextBuilder.append(CHL.getTour(i).getGame(j).getScore());
+                        messageTextBuilder.append("\n");
+                        messageTextBuilder.append(CHL.getTour(i).getGame(j).getStatistic());
+                        messageTextBuilder.append("\n\n");
+                    }
                 }
-        }else{
-            messageTextBuilder.append("Список всех команд КХЛ");
-            for (String name : CHL.getTeams().keySet()) {
-                messageTextBuilder.append("\n");
-                messageTextBuilder.append(name);
             }
-            messageTextBuilder.append("\n\n");
-            messageTextBuilder.append("Если вам нужна информация о какой то команде напишите её название после данной команды...");
+        }else{
+            messageTextBuilder.append("Введите номер недели после данной команды для просмотра информации...");
+            messageTextBuilder.append("\n");
+            messageTextBuilder.append("Доступные к просмотру: first,second;");
         }
 
         SendMessage answer = new SendMessage();
@@ -59,5 +62,4 @@ public class InfoTeam extends BotCommand {
             e.printStackTrace();
         }
     }
-
 }

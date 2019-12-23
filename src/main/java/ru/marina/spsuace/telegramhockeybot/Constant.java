@@ -2,6 +2,7 @@ package ru.marina.spsuace.telegramhockeybot;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Constant {
@@ -22,8 +23,22 @@ public class Constant {
             "1:1 Н.Лямкин; 2:1 А.Галимов; ");
     public static final Game game3 = new Game("Витязь:Нефтехимик","2:1","1:0 А.Бывальцев; " +
             "1:1 Я.Берглунд; 2:1 А.Макеев; ");
+    public static final Game game4 = new Game("СКА:Металлург","2:1","1:0 А.Зуб; " +
+            "1:1 Д.Расмуссен; 2:1 Д.Кагарлицкий; ");
+    public static final Game game5 = new Game("Авангард:Салават Юлаев","2:1","1:0 Е.Мартынов; " +
+            "1:1 Т.Хартикайнен; 2:1 В.Войнов; ");
+    public static final Game game6 = new Game("Трактор:Нефтехимик","2:1","1:0 Е.Виртанен; " +
+            "1:1 М.Хайруллин; 2:1 Л.Седлак; ");
 
-    public static final Championship CHL = new Championship(Arrays.asList(placeSKA,placeLOK,placeAKB,placeAVN));
+    public static final Game[] firstWeek={game1,game2,game3};
+    public static final List<Game> listGame1= Arrays.asList(firstWeek);
+    public static final Tour tour1 = new Tour (listGame1,"first");
+
+    public static final Game[] secondWeek={game4,game5,game6};
+    public static final List<Game> listGame2= Arrays.asList(secondWeek);
+    public static final Tour tour2 = new Tour (listGame2,"second");
+
+    public static final Championship CHL = new Championship(Arrays.asList(tour1,tour2));
 
     static {
         Map<String, Team> teamMap = new HashMap<>();
@@ -34,4 +49,12 @@ public class Constant {
         CHL.setTeams(teamMap);
     }
 
+    static {
+        Map<String, Schedule> scheduleMap = new HashMap<>();
+        scheduleMap.put(SKA.getName(), placeSKA);
+        scheduleMap.put(LOK.getName(), placeLOK);
+        scheduleMap.put(AKB.getName(), placeAKB);
+        scheduleMap.put(AVN.getName(), placeAVN);
+        CHL.setSchedule(scheduleMap);
+    }
 }

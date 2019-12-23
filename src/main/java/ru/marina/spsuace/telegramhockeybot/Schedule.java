@@ -8,4 +8,13 @@ public class Schedule {
         name = name1;
         place = place1;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPlace() {
+        return place;
+    }
+
 }
