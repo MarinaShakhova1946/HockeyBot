@@ -4,9 +4,9 @@ public class Schedule {
     private String name;
     private int place;
 
-    public Schedule(String name1, int place1) {
-        name = name1;
-        place = place1;
+    public Schedule(String name, int place) {
+        this.name = name;
+        this.place = place;
     }
 
     public String getName() {
@@ -16,5 +16,4 @@ public class Schedule {
     public int getPlace() {
         return place;
     }
-
 }

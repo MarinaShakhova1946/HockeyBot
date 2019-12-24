@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class Championship {
 
-    private Map<String,Team> listTeam ;
-    private Map<String,Schedule> listTable ;
-    private List<Tour> listTour ;
+    private Map<String, Team> listTeam;
+    private Map<String, Schedule> listTable;
+    private List<Tour> listTour;
 
-    public Championship(List<Tour> tours) {
-        listTour=tours;
+    public Championship(List<Tour> listTour) {
+        this.listTour = listTour;
     }
 
     public Team getTeam(String name) {
@@ -21,7 +21,7 @@ public class Championship {
         listTeam = teamMap;
     }
 
-    public Map<String,Team> getTeams() {
+    public Map<String, Team> getTeams() {
         return listTeam;
     }
 
@@ -33,7 +33,7 @@ public class Championship {
         listTable = scheduleMap;
     }
 
-    public Map<String,Schedule> getSchedule() {
+    public Map<String, Schedule> getSchedule() {
         return listTable;
     }
 

@@ -6,11 +6,11 @@ public class Team {
     private String city;
     private String country;
 
-    public Team(String name1, String division1, String city1, String country1) {
-        name = name1;
-        division = division1;
-        city = city1;
-        country = country1;
+    public Team(String name, String division, String city, String country) {
+        this.name = name;
+        this.division = division;
+        this.city = city;
+        this.country = country;
     }
 
     public String getName() {
@@ -28,6 +28,4 @@ public class Team {
     public String getCountry() {
         return country;
     }
-
-
 }

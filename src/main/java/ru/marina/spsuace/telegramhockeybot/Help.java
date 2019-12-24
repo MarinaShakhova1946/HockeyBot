@@ -12,28 +12,25 @@ public class Help extends BotCommand {
     private static final String commandIdentifier = "help";
     private static final String description = "Information about commands";
 
-    public Help() { super(commandIdentifier, description); }
+    public Help() {
+        super(commandIdentifier, description);
+    }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         String userName = chat.getUserName();
-
         if (userName == null || userName.isEmpty()) {
             userName = user.getFirstName() + " " + user.getLastName();
         }
-
         StringBuilder messageTextBuilder = new StringBuilder();
-
         messageTextBuilder.append("ИНФОРМАЦИЯ О ФУНКЦИОНАЛЕ ДАННОГО СПОРТИВНОГО БОТА:\n");
         messageTextBuilder.append("/help - команда, показывающая список всех команд;\n");
         messageTextBuilder.append("/infoteam - команда, показывающая список всех клубов и выводящая информацию " +
-                        "любой из них;\n");
+                "любой из них;\n");
         messageTextBuilder.append("/infotable - команда, показывающая турнирную таблицу и выводящая информацию " +
                 "вашей команде в ней;\n");
         messageTextBuilder.append("/infotour - команда, показывающая информацию " +
                 "о сыгранных на неделе играх;\n");
-
-
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
         answer.setText(messageTextBuilder.toString());

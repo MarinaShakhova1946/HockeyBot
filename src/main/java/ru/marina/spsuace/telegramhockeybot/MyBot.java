@@ -24,29 +24,27 @@ public class MyBot extends TelegramLongPollingCommandBot {
         register(new InfoTour());
     }
 
-        public static void main(String[] args) {
-            ApiContextInitializer.init();
-            TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-            try {
-                DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
-                botOptions.setProxyHost("151.253.165.70");
-                botOptions.setProxyPort(8080);
-                botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
-                telegramBotsApi.registerBot(new MyBot(botOptions));
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+    public static void main(String[] args) {
+        ApiContextInitializer.init();
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        try {
+            DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
+            botOptions.setProxyHost("117.1.16.131");
+            botOptions.setProxyPort(8080);
+            botOptions.setProxyType(DefaultBotOptions.ProxyType.HTTP);
+            telegramBotsApi.registerBot(new MyBot(botOptions));
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
+    }
 
 
     @Override
     public void processNonCommandUpdate(Update update) {
         update.getUpdateId();
-
         SendMessage sendMessage = new SendMessage().setChatId(update.getMessage().getChatId());
         chat_id = update.getMessage().getChatId();
         sendMessage.setText(input(update.getMessage().getText()));
-
         try {
             execute(sendMessage);
         } catch (TelegramApiException e) {
@@ -54,8 +52,8 @@ public class MyBot extends TelegramLongPollingCommandBot {
         }
     }
 
-    public String input(String msg){
-        if(msg.contains("Hi") || msg.contains("Hello") || msg.contains("Привет")){
+    public String input(String msg) {
+        if (msg.contains("Hi") || msg.contains("Hello") || msg.contains("Привет")) {
             return "Привет фанатам! Я спротивный бот КХЛ. Если любишь хоккей, погнали!!!";
         }
         return "Не понял!";

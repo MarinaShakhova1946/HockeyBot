@@ -13,6 +13,7 @@ public class InfoTour extends BotCommand {
 
     private static final String commandIdentifier = "infotour";
     private static final String description = "Information about tours";
+
     public InfoTour() {
         super(commandIdentifier, description);
     }
@@ -20,25 +21,18 @@ public class InfoTour extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         String userName = chat.getUserName();
-
         if (userName == null || userName.isEmpty()) {
             userName = user.getFirstName() + " " + user.getLastName();
         }
-
         StringBuilder messageTextBuilder = new StringBuilder();
-
-        String[] noms;
-        noms = new String[2];
-        for (int i = 0; i < 2; i++) {
-            noms[i]=CHL.getTour(i).getNomer();
-        }
-
         if (arguments != null && arguments.length > 0) {
             messageTextBuilder.append("Прошедшие за выбранную неделю игры:\n");
             for (int i = 0; i < 2; i++) {
-                if(arguments[0].equals(noms[i])){
+                if (arguments[0].equals(CHL.getTour(i).getNumber())) {
                     for (int j = 0; j < 3; j++) {
-                        messageTextBuilder.append(CHL.getTour(i).getGame(j).getName());
+                        messageTextBuilder.append(CHL.getTour(i).getGame(j).getNameFirst());
+                        messageTextBuilder.append(":");
+                        messageTextBuilder.append(CHL.getTour(i).getGame(j).getNameSecond());
                         messageTextBuilder.append("\n");
                         messageTextBuilder.append(CHL.getTour(i).getGame(j).getScore());
                         messageTextBuilder.append("\n");
@@ -47,12 +41,11 @@ public class InfoTour extends BotCommand {
                     }
                 }
             }
-        }else{
+        } else {
             messageTextBuilder.append("Введите номер недели после данной команды для просмотра информации...");
             messageTextBuilder.append("\n");
             messageTextBuilder.append("Доступные к просмотру: first,second;");
         }
-
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
         answer.setText(messageTextBuilder.toString());

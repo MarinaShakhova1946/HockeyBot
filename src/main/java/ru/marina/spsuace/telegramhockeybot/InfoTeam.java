@@ -13,6 +13,7 @@ public class InfoTeam extends BotCommand {
 
     private static final String commandIdentifier = "infoteam";
     private static final String description = "Information about teams";
+
     public InfoTeam() {
         super(commandIdentifier, description);
     }
@@ -20,27 +21,24 @@ public class InfoTeam extends BotCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         String userName = chat.getUserName();
-
         if (userName == null || userName.isEmpty()) {
             userName = user.getFirstName() + " " + user.getLastName();
         }
-
         StringBuilder messageTextBuilder = new StringBuilder();
-
         if (arguments != null && arguments.length > 0) {
-                Team team = CHL.getTeam(arguments[0]);
-                if(team != null){
-                    messageTextBuilder.append("ИНФОРМАЦИЯ О КОМАНДЕ:\n");
-                    messageTextBuilder.append("Название команды: ");
-                    messageTextBuilder.append(team.getName());
-                    messageTextBuilder.append("Дивизион: ");
-                    messageTextBuilder.append(team.getDiv());
-                    messageTextBuilder.append("Город: ");
-                    messageTextBuilder.append(team.getCity());
-                    messageTextBuilder.append("Страна: ");
-                    messageTextBuilder.append(team.getCountry());
-                }
-        }else{
+            Team team = CHL.getTeam(arguments[0]);
+            if (team != null) {
+                messageTextBuilder.append("ИНФОРМАЦИЯ О КОМАНДЕ:\n");
+                messageTextBuilder.append("Название команды: ");
+                messageTextBuilder.append(team.getName());
+                messageTextBuilder.append("Дивизион: ");
+                messageTextBuilder.append(team.getDiv());
+                messageTextBuilder.append("Город: ");
+                messageTextBuilder.append(team.getCity());
+                messageTextBuilder.append("Страна: ");
+                messageTextBuilder.append(team.getCountry());
+            }
+        } else {
             messageTextBuilder.append("Список всех команд КХЛ");
             for (String name : CHL.getTeams().keySet()) {
                 messageTextBuilder.append("\n");

@@ -3,16 +3,16 @@ package ru.marina.spsuace.telegramhockeybot;
 import java.util.List;
 
 public class Tour {
-    private List<Game> listGame ;
-    private String nomWeek;
+    private List<Game> listGame;
+    private String numWeek;
 
-    public Tour(List<Game> games1, String nomWeek1) {
-       listGame=games1;
-       nomWeek=nomWeek1;
+    public Tour(List<Game> listGame, String numWeek) {
+        this.listGame = listGame;
+        this.numWeek = numWeek;
     }
 
-    public String getNomer() {
-        return nomWeek;
+    public String getNumber() {
+        return numWeek;
     }
 
     public Game getGame(int index) {

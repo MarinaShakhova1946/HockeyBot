@@ -14,34 +14,33 @@ public class InfoTable extends BotCommand {
     private static final String commandIdentifier = "infotable";
     private static final String description = "Information about result table";
 
-    public InfoTable() { super(commandIdentifier, description); }
+    public InfoTable() {
+        super(commandIdentifier, description);
+    }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
         String userName = chat.getUserName();
-
         if (userName == null || userName.isEmpty()) {
             userName = user.getFirstName() + " " + user.getLastName();
         }
-
         StringBuilder messageTextBuilder = new StringBuilder();
-
         if (arguments != null && arguments.length > 0) {
-            Schedule schedule=CHL.getSchedule(arguments[0]);
-                if (schedule!= null) {
-                    messageTextBuilder.append("Место в турнирной таблице\n");
-                    messageTextBuilder.append("Команда: ");
-                    messageTextBuilder.append(schedule.getName());
-                    messageTextBuilder.append("\n");
-                    messageTextBuilder.append("Место: ");
-                    messageTextBuilder.append(schedule.getPlace());
-                    messageTextBuilder.append("\n");
-                }
-        }else{
+            Schedule schedule = CHL.getSchedule(arguments[0]);
+            if (schedule != null) {
+                messageTextBuilder.append("Место в турнирной таблице\n");
+                messageTextBuilder.append("Команда: ");
+                messageTextBuilder.append(schedule.getName());
+                messageTextBuilder.append("\n");
+                messageTextBuilder.append("Место: ");
+                messageTextBuilder.append(schedule.getPlace());
+                messageTextBuilder.append("\n");
+            }
+        } else {
             messageTextBuilder.append("Турнирная таблица КХЛ:");
             messageTextBuilder.append("\n");
             for (String name : CHL.getSchedule().keySet()) {
-                Schedule schedule=CHL.getSchedule(name);
+                Schedule schedule = CHL.getSchedule(name);
                 messageTextBuilder.append("\n");
                 messageTextBuilder.append("Команда:   ");
                 messageTextBuilder.append(schedule.getName());
@@ -52,7 +51,6 @@ public class InfoTable extends BotCommand {
             messageTextBuilder.append("\n\n");
             messageTextBuilder.append("Для вывода места вашего клуба напишите его название после команды...");
         }
-
         SendMessage answer = new SendMessage();
         answer.setChatId(chat.getId().toString());
         answer.setText(messageTextBuilder.toString());
